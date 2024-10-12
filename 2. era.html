@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Era Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f7fa;
+        }
+
+        h1 {
+            font-size: 4em; /* Bigger title */
+            color: #2b2d42;
+        }
+
+        h2 {
+            font-weight: bold;
+            font-size: 3em; /* Bigger subheading */
+            margin: 10px 0;
+            color: #2b2d42;
+        }
+
+        button {
+            font-size: 2rem; /* Bigger button text */
+            padding: 15px 30px; /* Bigger button size */
+            background-color: #8d99ae;
+            color: #edf2f4;
+            border: none;
+            border-radius: 8px;
+            margin: 20px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #6c757d;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            font-size: 2em; /* Bigger details text */
+        }
+
+        li {
+            margin: 10px 0; /* More space between items */
+        }
+    </style>
+</head>
+<body>
+    <h1>Era Details</h1>
+    <h2 id="era-title"></h2>
+    <ul id="era-details"></ul>
+    <button onclick="goBack()">Try Another Era</button>
+    <script>
+        function goBack() {
+            window.location.href = "index.html";
+        }
+        const memories = {
+            '1950s': [
+                "The first nuclear power plant opened.",
+                "Elvis Presley rose to fame.",
+                "The Korean War took place.",
+                "The first color television sets were sold.",
+                "McDonald's opened its first franchise.",
+                "The first space satellite, Sputnik, was launched by the USSR.",
+                "Rock 'n' roll music exploded in popularity.",
+                "The polio vaccine was developed by Jonas Salk.",
+                "Disneyland opened in California.",
+                "The Brown v. Board of Education decision declared segregation in schools unconstitutional."
+            ],
+            '1960s': [
+                "The Civil Rights Movement gained momentum.",
+                "The first man landed on the moon in 1969.",
+                "The Vietnam War escalated.",
+                "Woodstock music festival became iconic.",
+                "The Beatles revolutionized music.",
+                "Martin Luther King Jr. delivered his 'I Have a Dream' speech.",
+                "Television became a household staple.",
+                "The first Super Bowl was played.",
+                "The first heart transplant was performed.",
+                "The cultural revolution in China began."
+            ],
+            '1970s': [
+                "The Watergate scandal led to President Nixon's resignation.",
+                "The first Earth Day was celebrated in 1970.",
+                "The Vietnam War ended.",
+                "Punk rock music emerged.",
+                "The Atari 2600 was released, popularizing video games.",
+                "Star Wars was released, changing the film industry.",
+                "The first oil crisis led to fuel shortages.",
+                "The first mobile phone call was made.",
+                "The U.S. launched the Voyager spacecraft.",
+                "The first test-tube baby was born."
+            ],
+            '1980s': [
+                "The fall of the Berlin Wall marked the end of the Cold War.",
+                "The personal computer became common.",
+                "MTV launched, changing music promotion.",
+                "The space shuttle Challenger disaster occurred.",
+                "The HIV/AIDS epidemic was identified.",
+                "Michael Jackson's 'Thriller' became the best-selling album.",
+                "The first video game console wars began.",
+                "Chernobyl nuclear disaster occurred.",
+                "The first mobile phones became available.",
+                "The stock market crashed in 1987."
+            ],
+            '1990s': [
+                "The World Wide Web was invented.",
+                "The end of the Cold War led to new global dynamics.",
+                "The Gulf War took place.",
+                "Harry Potter was first published.",
+                "The dot-com bubble began.",
+                "The first text message was sent.",
+                "The first DVD was released.",
+                "Nirvana popularized grunge music.",
+                "The Y2K scare raised fears about the millennium.",
+                "The first season of 'Friends' aired."
+            ],
+            '2000s': [
+                "The September 11 attacks changed global politics.",
+                "Social media began to rise.",
+                "The iPhone was released in 2007.",
+                "Harry Potter films became hugely popular.",
+                "The financial crisis of 2008 began.",
+                "The human genome was sequenced.",
+                "Reality TV exploded in popularity.",
+                "YouTube was founded.",
+                "The first Black president of the U.S., Barack Obama, was elected.",
+                "The Paris Agreement was adopted."
+            ],
+            '2010s': [
+                "Smartphones became ubiquitous.",
+                "Social media influenced global politics.",
+                "The #MeToo movement gained traction.",
+                "Climate change awareness grew.",
+                "The first electric self-driving cars were tested.",
+                "Streaming services transformed entertainment.",
+                "3D printing became more mainstream.",
+                "Artificial intelligence made significant strides.",
+                "Virtual reality gained popularity.",
+                "The rise of e-commerce changed shopping."
+            ],
+            '2020s': [
+                "The COVID-19 pandemic affected the world.",
+                "Remote work became the norm.",
+                "Vaccines were developed at record speed.",
+                "Climate change protests gained momentum.",
+                "The rise of cryptocurrency began.",
+                "Social justice movements continued to grow.",
+                "Streaming services dominated entertainment.",
+                "Space tourism became a reality.",
+                "Telehealth became more common.",
+                "AI tools grew more advanced."
+            ],
+            '2030s': [
+                "Expected advancements in AI and automation.",
+                "Potential breakthroughs in climate technology.",
+                "More cities adopting smart technology.",
+                "Space exploration may expand with Mars missions.",
+                "Healthcare may see personalized medicine.",
+                "Urban planning may focus on sustainability.",
+                "Education may shift more online.",
+                "Self-driving cars may become common.",
+                "VR/AR might transform entertainment and work.",
+                "Global collaboration on climate change could increase."
+            ],
+            '2040s': [
+                "Future advancements in renewable energy.",
+                "Further developments in AI ethics and governance.",
+                "Exploration and colonization of Mars may start.",
+                "Increased urbanization with smart cities.",
+                "Healthcare may be revolutionized by gene editing.",
+                "New frontiers in space travel.",
+                "Increased global cooperation on major issues.",
+                "Possibility of universal basic income being tested.",
+                "Climate resilience strategies becoming essential.",
+                "Society's values may shift towards sustainability."
+            ]
+        };
+        const urlParams = new URLSearchParams(window.location.search);
+        const era = urlParams.get('era');
+        document.getElementById('era-title').innerText = era;
+        const details = memories[era] || ["No details available."];
+        details.forEach(detail => {
+            const li = document.createElement('li');
+            li.textContent = detail;
+            document.getElementById('era-details').appendChild(li);
+        });
+    </script>
+</body>
+</html>
